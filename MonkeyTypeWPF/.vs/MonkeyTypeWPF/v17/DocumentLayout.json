@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\mtvdc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\MonkeyTypeWPF\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{44D88977-937E-44F9-8DE6-AB99BD5B9680}|MonkeyTypeWPF.csproj|c:\\users\\mtvdc\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\monkeytypewpf\\models\\testresultsmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44D88977-937E-44F9-8DE6-AB99BD5B9680}|MonkeyTypeWPF.csproj|solutionrelative:models\\testresultsmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{44D88977-937E-44F9-8DE6-AB99BD5B9680}|MonkeyTypeWPF.csproj|c:\\users\\mtvdc\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\monkeytypewpf\\utilities\\files\\csvdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44D88977-937E-44F9-8DE6-AB99BD5B9680}|MonkeyTypeWPF.csproj|solutionrelative:utilities\\files\\csvdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TestResultsModel.cs",
+              "DocumentMoniker": "C:\\Users\\mtvdc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\MonkeyTypeWPF\\models\\TestResultsModel.cs",
+              "RelativeDocumentMoniker": "models\\TestResultsModel.cs",
+              "ToolTip": "C:\\Users\\mtvdc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\MonkeyTypeWPF\\models\\TestResultsModel.cs",
+              "RelativeToolTip": "models\\TestResultsModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-13T20:14:34.622Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CSVData.cs",
+              "DocumentMoniker": "C:\\Users\\mtvdc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\MonkeyTypeWPF\\utilities\\files\\CSVData.cs",
+              "RelativeDocumentMoniker": "utilities\\files\\CSVData.cs",
+              "ToolTip": "C:\\Users\\mtvdc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\MonkeyTypeWPF\\utilities\\files\\CSVData.cs",
+              "RelativeToolTip": "utilities\\files\\CSVData.cs",
+              "ViewState": "AQIAAN4AAAAAAAAAAAAAAO4AAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-13T20:13:47.972Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

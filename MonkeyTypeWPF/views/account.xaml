@@ -1,0 +1,487 @@
+﻿<UserControl x:Class="MonkeyTypeWPF.views.account"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:MonkeyTypeWPF.modelviews"
+             xmlns:oxy="http://oxyplot.org/wpf"
+             xmlns:uc="clr-namespace:MonkeyTypeWPF.usercontrols"
+             xmlns:cvtr="clr-namespace:MonkeyTypeWPF.utilities.Conventers"
+             mc:Ignorable="d" 
+             d:DesignHeight="1800" d:DesignWidth="920"
+             BorderThickness="0">
+    <!--Создаем стиль для наведения на подсказку графа, убираем линии при наведении-->
+    <UserControl.Resources>
+        <Style TargetType="oxy:TrackerControl">
+            <Setter Property="LineStroke" Value="Transparent"/>
+        </Style>
+        <cvtr:IsRecordConverter x:Key="IsRecordConverter"/>
+    </UserControl.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" PanningMode="VerticalOnly">
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <!--Основные данные аккаунта-->
+            <Border Background="#2c2e31" 
+                Width="850" 
+                Height="120"
+                VerticalAlignment="Top"
+                Margin="0,30,0,0"
+                CornerRadius="10"
+                Grid.Row="0">
+                <Grid>
+                    <!--левая часть данных-->
+                    <StackPanel Orientation="Horizontal" 
+                            Width="310"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center">
+                        <Image Source="/images/account_page_icon.png"
+                           Width="80"
+                           Height="80"
+                           VerticalAlignment="Top"/>
+                        <!--ник и дата присоединения-->
+                        <StackPanel Orientation="Vertical"
+                                Width="230">
+                            <!--юзер контрол с именем юзера-->
+                            <uc:inputname 
+                            Margin="10,10,0,0"
+                            Title="name"
+                            NickName="{Binding DisplayNickName}"
+                            Command="{Binding ChangeNickNameCommand}"/>
+                            <!--Дата-->
+                            <StackPanel Orientation="Horizontal"
+                                    Margin="10,0,0,0">
+                                <TextBlock Text="joined "
+                                   FontSize="12"
+                                   Style="{StaticResource defaultstyle}"/>
+                                <TextBlock Text="{Binding DisplayCreateAccount}"
+                                       FontSize="12"
+                                       Foreground="#646669"
+                                       Style="{StaticResource defaultstyle}"/>
+                            </StackPanel>
+                            <!--Бордер для разделения-->
+                            <Border Width="10"
+                                Height="100"
+                                HorizontalAlignment="Right"
+                                Margin="0,-58,0,0"
+                                CornerRadius="5"
+                                Background="#323437"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <!--Стек панель основных данных-->
+                    <StackPanel Orientation="Horizontal"
+                            Margin="10,0,0,0"
+                            Width="480"
+                            HorizontalAlignment="Right">
+                        <!--кол-во начатых тестов-->
+                        <StackPanel Orientation="Vertical"
+                                Width="160"
+                                VerticalAlignment="Center">
+                            <TextBlock Text="tests started"
+                                   HorizontalAlignment="Left"
+                                   Style="{StaticResource defaultstyle}"/>
+                            <TextBlock HorizontalAlignment="Left"
+                                   Text="{Binding DisplayTestsStarted}"
+                                   Style="{StaticResource statisticstyle}"/>
+                        </StackPanel>
+                        <!--кол-во завершенных тестов-->
+                        <StackPanel Orientation="Vertical"
+                                Width="160"
+                                VerticalAlignment="Center">
+                            <TextBlock Text="tests completed"
+                                   HorizontalAlignment="Left"
+                                   Style="{StaticResource defaultstyle}"/>
+                            <TextBlock HorizontalAlignment="Left"
+                                   Cursor="Hand"
+                                   Text="{Binding DisplayTestsCompleted}"
+                                   Style="{StaticResource statisticstyle}">
+                                <TextBlock.ToolTip>
+                                    <ToolTip Placement="Top" HorizontalOffset="-140">
+                                        <ToolTip.Template>
+                                            <ControlTemplate TargetType="ToolTip">
+                                                <uc:UpperToolTip ToolTipText="{Binding DisplayTestsCompletedToolTip}"/>
+                                            </ControlTemplate>
+                                        </ToolTip.Template>
+                                    </ToolTip>
+                                </TextBlock.ToolTip>
+                            </TextBlock>
+                        </StackPanel>
+                        <!--время печатания-->
+                        <StackPanel Orientation="Vertical"
+                                Width="160"
+                                VerticalAlignment="Center">
+                            <TextBlock Text="time typing"
+                                   HorizontalAlignment="Left"
+                                   Style="{StaticResource defaultstyle}"/>
+                            <TextBlock HorizontalAlignment="Left"
+                                   Text="{Binding DisplayTimeTyping}"
+                                   Style="{StaticResource statisticstyle}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <!--Грид рекордов-->
+            <Grid Grid.Row="1"
+              Margin="0,20,0,0">
+                <!--Рекорды по времени-->
+                <Border Background="#2c2e31" 
+                Width="405" 
+                Height="120"
+                VerticalAlignment="Top"
+                Margin="35,0,0,0"
+                CornerRadius="10"
+                HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                        <uc:RecordsInfo
+                                     DataContext="{Binding RecordTests.Time15}"
+                                        Mode="{Binding Mode}"
+                                        WPM="{Binding WPM}"
+                                        RawWPM="{Binding RawWPM}"
+                                        Accurancy="{Binding Accuracy}"
+                                        Сonsistency="{Binding Consistency}"
+                                        Date="{Binding Date}"/>
+                        <uc:RecordsInfo
+                                     DataContext="{Binding RecordTests.Time30}"
+                                        Mode="{Binding Mode}"
+                                        WPM="{Binding WPM}"
+                                        RawWPM="{Binding RawWPM}"
+                                        Accurancy="{Binding Accuracy}"
+                                        Сonsistency="{Binding Consistency}"
+                                        Date="{Binding Date}"/>
+                        <uc:RecordsInfo
+                                     DataContext="{Binding RecordTests.Time60}"
+                                        Mode="{Binding Mode}"
+                                        WPM="{Binding WPM}"
+                                        RawWPM="{Binding RawWPM}"
+                                        Accurancy="{Binding Accuracy}"
+                                        Сonsistency="{Binding Consistency}"
+                                        Date="{Binding Date}"/>
+                        <uc:RecordsInfo
+                                     DataContext="{Binding RecordTests.Time120}"
+                                        Mode="{Binding Mode}"
+                                        WPM="{Binding WPM}"
+                                        RawWPM="{Binding RawWPM}"
+                                        Accurancy="{Binding Accuracy}"
+                                        Сonsistency="{Binding Consistency}"
+                                        Date="{Binding Date}"/>
+                    </StackPanel>
+                </Border>
+                <!--Рекорды по словам-->
+                <Border Background="#2c2e31" 
+                Width="405" 
+                Height="120"
+                VerticalAlignment="Top"
+                Margin="0,0,35,0"
+                CornerRadius="10"
+                HorizontalAlignment="Right">
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center">
+                        <uc:RecordsInfo
+                                     DataContext="{Binding RecordTests.Words10}"
+                                        Mode="{Binding Mode}"
+                                        WPM="{Binding WPM}"
+                                        RawWPM="{Binding RawWPM}"
+                                        Accurancy="{Binding Accuracy}"
+                                        Сonsistency="{Binding Consistency}"
+                                        Date="{Binding Date}"/>
+                        <uc:RecordsInfo
+                                     DataContext="{Binding RecordTests.Words25}"
+                                        Mode="{Binding Mode}"
+                                        WPM="{Binding WPM}"
+                                        RawWPM="{Binding RawWPM}"
+                                        Accurancy="{Binding Accuracy}"
+                                        Сonsistency="{Binding Consistency}"
+                                        Date="{Binding Date}"/>
+                        <uc:RecordsInfo
+                                     DataContext="{Binding RecordTests.Words50}"
+                                        Mode="{Binding Mode}"
+                                        WPM="{Binding WPM}"
+                                        RawWPM="{Binding RawWPM}"
+                                        Accurancy="{Binding Accuracy}"
+                                        Сonsistency="{Binding Consistency}"
+                                        Date="{Binding Date}"/>
+                        <uc:RecordsInfo
+                                     DataContext="{Binding RecordTests.Words100}"
+                                        Mode="{Binding Mode}"
+                                        WPM="{Binding WPM}"
+                                        RawWPM="{Binding RawWPM}"
+                                        Accurancy="{Binding Accuracy}"
+                                        Сonsistency="{Binding Consistency}"
+                                        Date="{Binding Date}"/>
+                    </StackPanel>
+
+                </Border>
+            </Grid>
+            <!--Грид с точечным графиком тестов-->
+            <Grid Grid.Row="2">
+                <oxy:PlotView Model="{Binding ScatterModel}"
+                          HorizontalAlignment="Stretch"
+                          Height="350"
+                          Background="Transparent"
+                          Controller="{Binding customController}"
+                          Margin="0,10,0,0">
+                    <!--
+                у подсказки(трекера) oxyplot есть одна проблема связанная с кешированием ее размера
+                если рядом будет треугольник и кружок, то при перемещении курсора с треугольника на курсор,
+                то размер не поменяется, а текст поменяется.
+                Из этого вылезает визуальный баг на который к сожалению я не смог повлиять
+                -->
+                    <oxy:PlotView.DefaultTrackerTemplate>
+                        <ControlTemplate>
+                            <oxy:TrackerControl Position="{Binding Position}" LineExtents="{Binding ScatterModel.PlotArea}">
+                                <oxy:TrackerControl.Background>
+                                    <SolidColorBrush Color="#C0000000" />
+                                </oxy:TrackerControl.Background>
+                                <oxy:TrackerControl.Content>
+                                    <Border Background="Transparent" 
+                                    Padding="2">
+                                        <TextBlock Text="{Binding}" Style="{StaticResource graphstatisticstyle}" Margin="7"/>
+                                    </Border>
+                                </oxy:TrackerControl.Content>
+                            </oxy:TrackerControl>
+                        </ControlTemplate>
+                    </oxy:PlotView.DefaultTrackerTemplate>
+                </oxy:PlotView>
+            </Grid>
+            <!--Грид с колонным графиком тестов-->
+            <Grid Grid.Row="3">
+                <oxy:PlotView Model="{Binding BarModel}"
+                          HorizontalAlignment="Stretch"
+                          Height="200"
+                          Background="Transparent"
+                          Controller="{Binding customController}"
+                          Margin="0,10,35,0">
+                    <oxy:PlotView.DefaultTrackerTemplate>
+                        <ControlTemplate>
+                            <oxy:TrackerControl Position="{Binding Position}" LineExtents="{Binding ScatterModel.PlotArea}">
+                                <oxy:TrackerControl.Background>
+                                    <SolidColorBrush Color="#C0000000" />
+                                </oxy:TrackerControl.Background>
+                                <oxy:TrackerControl.Content>
+                                    <Border Background="Transparent" 
+                                    Padding="2">
+                                        <TextBlock Text="{Binding}" Style="{StaticResource graphstatisticstyle}" Margin="7"/>
+                                    </Border>
+                                </oxy:TrackerControl.Content>
+                            </oxy:TrackerControl>
+                        </ControlTemplate>
+                    </oxy:PlotView.DefaultTrackerTemplate>
+                </oxy:PlotView>
+            </Grid>
+            <!--Грид с статистикой-->
+            <Grid Grid.Row="4"
+                  Margin="35,10,35,0">
+                <!--Колонны, так как данные разделены на 3 в одном ряду-->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!--Стек панель с кол-вом слов-->
+                <StackPanel Orientation="Horizontal"
+                            Grid.Column="1"
+                            Grid.Row="0"
+                            HorizontalAlignment="Center">
+                    <TextBlock Text="estimated words typed "
+                               Style="{StaticResource defaultstyle}"/>
+                    <TextBlock Text="{Binding DisplayWordsTyped}"
+                               Style="{StaticResource statisticstyle}"/>
+                </StackPanel>
+
+                <!--Тестов начато-->
+                <StackPanel Style="{StaticResource statisticpanel}"
+                            Grid.Row="1"
+                            Grid.Column="0">
+                    <TextBlock Text="tests started"
+                               Style="{StaticResource defaultstyle}"/>
+                    <TextBlock Text="{Binding DisplayTestsStarted}"
+                               Style="{StaticResource statisticpartstyle}"/>
+                </StackPanel>
+
+                <!--Тестов завершено-->
+                <StackPanel Style="{StaticResource statisticpanel}"
+                            Grid.Row="1"
+                            Grid.Column="1">
+                    <TextBlock Text="tests completed"
+                               Style="{StaticResource defaultstyle}"
+                               HorizontalAlignment="Left"/>
+                    <!--кол-во и процент-->
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding DisplayTestsCompleted}" 
+                                   Style="{StaticResource statisticstyle}"/>
+                        <TextBlock Text="{Binding DisplayTestCompletedPerStarted,StringFormat={}({0}%)}" 
+                                   Style="{StaticResource statisticstyle}"/>
+                    </StackPanel>
+                    <TextBlock Text="{Binding DisplayRestartsPerCompletedTests,StringFormat={}{0} restarts per completed test}"
+                               Style="{StaticResource statisticpartstyle}"
+                               FontSize="12"/>
+                </StackPanel>
+
+                <!--Время печатания-->
+                <StackPanel Style="{StaticResource statisticpanel}"
+                            Grid.Row="1"
+                            Grid.Column="2">
+                    <TextBlock Text="time typing"
+                               Style="{StaticResource defaultstyle}"
+                               HorizontalAlignment="Left"/>
+                    <TextBlock Text="{Binding DisplayTimeTyping}"
+                               Style="{StaticResource statisticpartstyle}"/>
+                </StackPanel>
+
+                <!--Самый большой wpm-->
+                <StackPanel Style="{StaticResource statisticpanel}"
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            DataContext="{Binding DisplayMaxTestWPM}">
+                    <TextBlock Text="highest wpm"
+                               Style="{StaticResource defaultstyle}"/>
+                    <TextBlock Text="{Binding WPM, StringFormat={}{0:0}}"
+                               Style="{StaticResource statisticpartstyle}"/>
+                    <TextBlock Text="{Binding Mode}"
+                               Style="{StaticResource statisticpartstyle}"
+                               FontSize="12"/>
+                </StackPanel>
+
+                <!--Средний WPM-->
+                <StackPanel Style="{StaticResource statisticpanel}"
+                            Grid.Row="2"
+                            Grid.Column="1">
+                    <TextBlock Text="average wpm"
+                               Style="{StaticResource defaultstyle}"/>
+                    <TextBlock Text="{Binding DisplayAverageWPM, StringFormat={}{0:0}}"
+                               Style="{StaticResource statisticpartstyle}"/>
+                </StackPanel>
+
+                <!--Средний WPM за последние 10 тестов-->
+                <StackPanel Style="{StaticResource statisticpanel}"
+                            Grid.Row="2"
+                            Grid.Column="2">
+                    <TextBlock Text="average wpm (last 10 tests)"
+                               Style="{StaticResource defaultstyle}"/>
+                    <TextBlock Text="{Binding DisplayAvgWPMLast10Tests, StringFormat={}{0:0}}"
+                               Style="{StaticResource statisticpartstyle}"/>
+                </StackPanel>
+                <!--Самый высокий сырой WPM-->
+                <StackPanel  Style="{StaticResource statisticpanel}"
+                            Grid.Column="0"
+                            Grid.Row="3">
+                    <TextBlock Text="highest raw wpm"
+                               Style="{StaticResource defaultstyle}"/>
+                    <TextBlock Text="{Binding DisplayHighestRawWPM, StringFormat={}{0:0}}"
+                               Style="{StaticResource statisticpartstyle}"/>
+                </StackPanel>
+                <!--средний сырой WPM-->
+                <StackPanel Style="{StaticResource statisticpanel}"
+                            Grid.Column="1"
+                            Grid.Row="3">
+                    <TextBlock Text="average raw wpm"
+                               Style="{StaticResource defaultstyle}"/>
+                    <TextBlock Text="{Binding DisplayAverageRawWPM, StringFormat={}{0:0}}"
+                               Style="{StaticResource statisticpartstyle}"/>
+                </StackPanel>
+                <!--средний сырой WPM за последние 10 тестов-->
+                <StackPanel Style="{StaticResource statisticpanel}"
+                            Grid.Column="2"
+                            Grid.Row="3">
+                    <TextBlock Text="average raw wpm (last 10 tests)"
+                               Style="{StaticResource defaultstyle}"/>
+                    <TextBlock Text="{Binding DisplayAvgRawWPM10Tests, StringFormat={}{0:0}}"
+                               Style="{StaticResource statisticpartstyle}"/>
+                </StackPanel>
+                <!--Максимальная точность-->
+                <StackPanel Style="{StaticResource statisticpanel}"
+                            Grid.Column="0"
+                            Grid.Row="4">
+                    <TextBlock Text="highest accuracy"
+                               Style="{StaticResource defaultstyle}"/>
+                    <TextBlock Text="{Binding DisplayHighestAccuracy, StringFormat={}{0:0}%}"
+                               Style="{StaticResource statisticpartstyle}"/>
+                </StackPanel>
+                <!--средняя точность-->
+                <StackPanel Style="{StaticResource statisticpanel}"
+                            Grid.Column="1"
+                            Grid.Row="4">
+                    <TextBlock Text="average accuracy"
+                               Style="{StaticResource defaultstyle}"/>
+                    <TextBlock Text="{Binding DisplayAverageAccuracy, StringFormat={}{0:0}%}"
+                               Style="{StaticResource statisticpartstyle}"/>
+                </StackPanel>
+                <!--средняя точность за последние 10 тестов-->
+                <StackPanel Style="{StaticResource statisticpanel}"
+                            Grid.Column="2"
+                            Grid.Row="4">
+                    <TextBlock Text="average accuracy(last 10 tests)"
+                               Style="{StaticResource defaultstyle}"/>
+                    <TextBlock Text="{Binding DisplayAvgAcc10lastTests, StringFormat={}{0:0}%}"
+                               Style="{StaticResource statisticpartstyle}"/>
+                </StackPanel>
+                <!--Максимальная последовательность-->
+                <StackPanel Style="{StaticResource statisticpanel}"
+                            Grid.Column="0"
+                            Grid.Row="5">
+                    <TextBlock Text="highest consistency"
+                               Style="{StaticResource defaultstyle}"/>
+                    <TextBlock Text="{Binding DisplayHighestConsistency, StringFormat={}{0:0}%}"
+                               Style="{StaticResource statisticpartstyle}"/>
+                </StackPanel>
+                <!--средняя последовательность-->
+                <StackPanel Style="{StaticResource statisticpanel}"
+                            Grid.Column="1"
+                            Grid.Row="5">
+                    <TextBlock Text="average consostency"
+                               Style="{StaticResource defaultstyle}"/>
+                    <TextBlock Text="{Binding DisplayAverageConsistency, StringFormat={}{0:0}%}"
+                               Style="{StaticResource statisticpartstyle}"/>
+                </StackPanel>
+                <!--средняя точность за последние 10 тестов-->
+                <StackPanel Style="{StaticResource statisticpanel}"
+                            Grid.Column="2"
+                            Grid.Row="5">
+                    <TextBlock Text="average consistency(last 10 tests)"
+                               Style="{StaticResource defaultstyle}"/>
+                    <TextBlock Text="{Binding DisplayAvgCon10lastTests, StringFormat={}{0:0}%}"
+                               Style="{StaticResource statisticpartstyle}"/>
+                </StackPanel>
+            </Grid>
+            <!--грид с кнопкой скачивания тестов и лист 10 последних тестов-->
+            <Grid Grid.Row="5">
+                <StackPanel Orientation="Vertical">
+                    <!--Кнопка скачивания CSV-->
+                    <uc:ExportCSV Command="{Binding ExportCSVCOmmand}" 
+                                  Margin="0,0,35,0"/>
+                    <DataGrid Style="{StaticResource Last10Tests}"
+                              ItemsSource="{Binding Last10Tests}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="" Width="30" Binding="{Binding IsRecord, Converter={StaticResource IsRecordConverter}}" CanUserSort="False" />
+                            <DataGridTextColumn Header="wpm" Width="70" Binding="{Binding WPM}"/>
+                            <DataGridTextColumn Header="raw" Width="70" Binding="{Binding RawWPM}"/>
+                            <DataGridTextColumn Header="accuracy" Width="80" Binding="{Binding Accuracy}"/>
+                            <DataGridTextColumn Header="consistency" Width="110" Binding="{Binding Consistency}"/>
+                            <DataGridTextColumn Header="chars" Width="100" Binding="{Binding Chars}" CanUserSort="False"/>
+                            <DataGridTextColumn Header="mode" Width="80" Binding="{Binding Mode}" CanUserSort="False"/>
+                            <DataGridTextColumn Header="language" Width="100" Binding="{Binding Language}" CanUserSort="False"/>
+                            <DataGridTextColumn Header="date" Width="200" Binding="{Binding Date, StringFormat={}{0:dd MMMM yyyy HH:mm:ss}}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

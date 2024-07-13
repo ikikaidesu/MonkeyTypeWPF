@@ -1,0 +1,178 @@
+﻿<UserControl x:Class="MonkeyTypeWPF.views.typing"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MonkeyTypeWPF.views"
+             xmlns:vm="clr-namespace:MonkeyTypeWPF.modelviews"
+             xmlns:Menu="clr-namespace:MonkeyTypeWPF.utilities"
+             xmlns:uc="clr-namespace:MonkeyTypeWPF.usercontrols"
+             mc:Ignorable="d" 
+             d:DesignHeight="525" d:DesignWidth="920">
+    <Grid>
+        <!--Вид и данные печатанья-->
+        <Border Background="#2c2e31" 
+                Width="500" 
+                Height="40"
+                VerticalAlignment="Top"
+                Margin="0,30,0,0"
+                CornerRadius="10">
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding TypingSettingsVisibility}" Value="False">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <!--Стек панель наших кнопок-->
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <!--Доп опции для текста-->
+                <CheckBox Content="@ punctuation"
+                          Style="{StaticResource selecttypingelements}"
+                          Command="{Binding AddPunctiationCommand}"
+                          CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}"/>
+                <CheckBox Content="# numbers"
+                        Style="{StaticResource selecttypingelements}"
+                        Margin="10,0,0,0"
+                        Command="{Binding AddNumbersCommand}"
+                        CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}"/>
+                <!--Бордер разделитель-->
+                <Border Width="5"
+                        Height="25"
+                        HorizontalAlignment="Right"
+                        CornerRadius="2"
+                        Background="#323437"
+                        Margin="10,0,0,0"/>
+                <!--Типы печатанья-->
+                <StackPanel Orientation="Horizontal">
+                    <RadioButton Content="🕓 time"
+                                 Style="{StaticResource selectformtyping}"
+                                 Margin="10,0,0,0"
+                                 IsChecked="True"
+                                 Command="{Binding ChangeTypingFormCommand}"
+                                 CommandParameter="time"/>
+                    <RadioButton Content="𝐀 words"
+                                 Style="{StaticResource selectformtyping}"
+                                 Margin="10,0,0,0"
+                                 Command="{Binding ChangeTypingFormCommand}"
+                                 CommandParameter="words"/>
+                </StackPanel>
+                <!--Бордер разделитель-->
+                <Border Width="5"
+                        Height="25"
+                        HorizontalAlignment="Right"
+                        CornerRadius="2"
+                        Background="#323437"
+                        Margin="10,0,0,0"/>
+                <StackPanel Orientation="Horizontal">
+                    <RadioButton Content="{Binding DisplayTypingParameter_1}"
+                                 Style="{StaticResource selectformtyping}"
+                                 Margin="10,0,0,0"
+                                 IsChecked="True"
+                                 Command="{Binding ChangeTypingParameterCommand}"
+                                 CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"/>
+                    <RadioButton Content="{Binding DisplayTypingParameter_2}"
+                                 Style="{StaticResource selectformtyping}"
+                                 Margin="10,0,0,0"
+                                 Command="{Binding ChangeTypingParameterCommand}"
+                                 CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"/>
+                    <RadioButton Content="{Binding DisplayTypingParameter_3}"
+                                 Style="{StaticResource selectformtyping}"
+                                 Margin="10,0,0,0"
+                                 Command="{Binding ChangeTypingParameterCommand}"
+                                 CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"/>
+                    <RadioButton Content="{Binding DisplayTypingParameter_4}"
+                                 Style="{StaticResource selectformtyping}"
+                                 Margin="10,0,0,0"
+                                 Command="{Binding ChangeTypingParameterCommand}"
+                                 CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+        <!--Подсказка сколько осталось слов/времени-->
+        <Grid Margin="35,75,0,320" >
+            <TextBlock Text="{Binding ToolTipText}"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Bottom"
+                       FontSize="32"
+                       Foreground="Gold">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding TypingSettingsVisibility}" Value="False">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+            </TextBlock>
+        </Grid>
+        <Grid Width="{Binding WidthText}"
+              Height="115"
+              Margin="35,0,0,0">
+            <TextBlock Text="{Binding DisplayText}"
+                       Style="{StaticResource InputText}"
+                       FontSize="{Binding FontSizeText}" />
+            <TextBox Text="{Binding UserInput, UpdateSourceTrigger=PropertyChanged}" 
+                     FontSize="{Binding FontSizeText}" 
+                     FontFamily="Consolas"
+                     Style="{StaticResource inputtext}" />
+            <ItemsControl ItemsSource="{Binding ColoredUserInput}" 
+                          VerticalAlignment="Top">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock
+                           x:Name="textBox"
+                           Text="{Binding Character}" 
+                           FontSize="{Binding FontSizeText}"
+                           FontFamily="Consolas">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding State}" Value="Incorrect">
+                                            <Setter Property="Foreground" Value="Red" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding State}" Value="Correct">
+                                            <Setter Property="Foreground" Value="White" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding State}" Value="Missed">
+                                            <Setter Property="Foreground" Value="#646669" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+        <Grid Margin="0,330,0,0">
+            <Button Content="⟳" 
+                    Style="{StaticResource DefaultStyle}"
+                    Height="40"
+                    Width="40"
+                    Command="{Binding ResetTextCommand}">
+                <Button.ToolTip>
+                    <ToolTip Placement="Top" HorizontalOffset="-35" VerticalOffset="80">
+                        <ToolTip.Template>
+                            <ControlTemplate TargetType="ToolTip">
+                                <uc:LowerUserControl ToolTipText="Restart test"/>
+                            </ControlTemplate>
+                        </ToolTip.Template>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+        </Grid>
+    </Grid>
+</UserControl>

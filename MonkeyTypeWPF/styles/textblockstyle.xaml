@@ -1,0 +1,70 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--Стиль для надписи логотипа-->
+    <Style TargetType="TextBlock" x:Key="LogoName">
+        <Setter Property="Foreground" Value="#deddd0"/>
+        <Setter Property="FontFamily" Value="pack://application:,,,/MonkeyTypeWPF;component/Fonts/#Roboto Mono"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    <!--Обычный стиль программы который чаще всего встречается-->
+    <Style TargetType="TextBlock" x:Key="defaultstyle">
+        <Setter Property="Foreground" Value="#646669"/>
+        <Setter Property="FontFamily" Value="pack://application:,,,/MonkeyTypeWPF;component/Fonts/#Roboto Mono"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    <!--Стиль для статистики-->
+    <Style TargetType="TextBlock" x:Key="statisticstyle">
+        <Setter Property="Foreground" Value="#d1d0c5"/>
+        <Setter Property="FontFamily" Value="pack://application:,,,/MonkeyTypeWPF;component/Fonts/#Roboto Mono"/>
+        <Setter Property="FontSize" Value="28"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    <!--Стиль для блока с статистикой-->
+    <Style TargetType="TextBlock" x:Key="statisticpartstyle">
+        <Setter Property="Foreground" Value="#d1d0c5"/>
+        <Setter Property="FontFamily" Value="pack://application:,,,/MonkeyTypeWPF;component/Fonts/#Roboto Mono"/>
+        <Setter Property="FontSize" Value="28"/>
+        <Setter Property="HorizontalAlignment" Value="left"/>
+    </Style>
+    <Style TargetType="TextBlock" x:Key="graphstatisticstyle">
+        <Setter Property="Foreground" Value="#d1d0c5"/>
+        <Setter Property="FontFamily" Value="pack://application:,,,/MonkeyTypeWPF;component/Fonts/#Roboto Mono"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+    <!--Стиль для текста для ввода-->
+    <Style TargetType="TextBlock" x:Key="InputText">
+        <Setter Property="Foreground" Value="#646669"/>
+        <Setter Property="FontFamily" Value="Consolas"/>
+        <Setter Property="IsHitTestVisible" Value="False"/>
+    </Style>
+    <!--Стиль для основного данных результата-->
+    <Style TargetType="TextBlock" x:Key="MainTestResults">
+        <Setter Property="Foreground" Value="Gold"/>
+        <Setter Property="FontSize" Value="50"/>
+        <Setter Property="FontFamily" Value="pack://application:,,,/MonkeyTypeWPF;component/Fonts/#Roboto Mono"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+    <!--Стиль для доп. данных результата-->
+    <Style TargetType="TextBlock" x:Key="OtherTestResults">
+        <Setter Property="Foreground" Value="Gold"/>
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontFamily" Value="pack://application:,,,/MonkeyTypeWPF;component/Fonts/#Roboto Mono"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+    <!--Стиль для текста результатов-->
+    <Style TargetType="TextBlock" x:Key="TextTestResults">
+        <Setter Property="Foreground" Value="#646669"/>
+        <Setter Property="FontFamily" Value="pack://application:,,,/MonkeyTypeWPF;component/Fonts/#Roboto Mono"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+</ResourceDictionary>

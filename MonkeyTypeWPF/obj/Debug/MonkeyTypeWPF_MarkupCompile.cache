@@ -1,0 +1,20 @@
+﻿MonkeyTypeWPF
+
+
+winexe
+C#
+.cs
+C:\Users\mtvdc\OneDrive\Рабочий стол\MonkeyTypeWPF\obj\Debug\
+MonkeyTypeWPF
+none
+false
+DEBUG;TRACE
+C:\Users\mtvdc\OneDrive\Рабочий стол\MonkeyTypeWPF\App.xaml
+16-631895801
+
+29-1386095044
+23850416815
+styles\buttonstyle.xaml;styles\checkboxstyle.xaml;styles\DataGridstyle.xaml;styles\radiobuttonstyle.xaml;styles\stackpanelstyle.xaml;styles\textboxstyle.xaml;usercontrols\ExportCSV.xaml;usercontrols\inputname.xaml;usercontrols\LowerToolTip.xaml;usercontrols\RecordsInfo.xaml;usercontrols\UpperToolTip.xaml;views\account.xaml;views\MainWindow.xaml;styles\textblockstyle.xaml;views\TestResults.xaml;views\typing.xaml;
+
+False
+

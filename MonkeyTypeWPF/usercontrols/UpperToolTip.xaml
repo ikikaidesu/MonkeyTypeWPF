@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="MonkeyTypeWPF.usercontrols.UpperToolTip"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MonkeyTypeWPF.usercontrols"
+             mc:Ignorable="d" 
+             x:Name="UpperToolTip_uc"
+             HorizontalAlignment="Center"
+             VerticalAlignment="Center">
+    <Grid>
+        <StackPanel>
+            <Border
+            Background="Black"
+            Padding="5"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center">
+                <TextBlock Text="{Binding ToolTipText, ElementName=UpperToolTip_uc}" 
+                           FontSize="14" 
+                           Foreground="White"
+                           Style="{StaticResource defaultstyle}"/>
+            </Border>
+            <Polygon Points="10,0 5,5 0,0" 
+                 Fill="Black" 
+                 Stroke="Black" 
+                 StrokeThickness="2"
+                 HorizontalAlignment="Center"
+                 VerticalAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
