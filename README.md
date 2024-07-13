@@ -8,6 +8,7 @@
     <img src="https://img.shields.io/badge/Newtonsoft.Json-13.0.3-blueviolet" alt="Newtonsoft.Json">
     <img src="https://img.shields.io/badge/Ookii.Dialogs.WPF-5.0.1-blueviolet" alt="Ookii.Dialogs.WPF">
     <img src="https://img.shields.io/badge/OxyPlot.WPF-2.1.2-blueviolet" alt="OxyPlot.WPF">
+    <img src="https://img.shields.io/badge/difficult-easy-blueviolet" alt="difficult">
 </p>
 
 <p align="center">
