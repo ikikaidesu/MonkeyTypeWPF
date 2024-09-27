@@ -1,0 +1,36 @@
+﻿<Application x:Class="MonkeyTypeWPF.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MonkeyTypeWPF"
+             xmlns:vm="clr-namespace:MonkeyTypeWPF.modelviews"
+             xmlns:view="clr-namespace:MonkeyTypeWPF.views">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--Подключение стилей-->
+                <ResourceDictionary Source="styles/textblockstyle.xaml"/>
+                <ResourceDictionary Source="styles/buttonstyle.xaml"/>
+                <ResourceDictionary Source="styles/radiobuttonstyle.xaml"/>
+                <ResourceDictionary Source="styles/checkboxstyle.xaml"/>
+                <ResourceDictionary Source="styles/textboxstyle.xaml"/>
+                <ResourceDictionary Source="styles/textboxstyle.xaml"/>
+                <ResourceDictionary Source="styles/stackpanelstyle.xaml"/>
+                <ResourceDictionary Source="styles/DataGridstyle.xaml"/>
+                <!--Подключение привязки-->
+                <!--<ResourceDictionary Source="utilities/datatemplate.xaml"/>-->
+            </ResourceDictionary.MergedDictionaries>
+            <!--Добавляем данные что к accountVM привязана view account-->
+            <DataTemplate DataType="{x:Type vm:accountVM}">
+                <view:account/>
+            </DataTemplate>
+            <!--Добавляем данные что к typingVM привязана view typing-->
+            <DataTemplate DataType="{x:Type vm:typingVM}">
+                <view:typing/>
+            </DataTemplate>
+            <!--Добавляем данные что к TestResultsVM привязана view TestResults-->
+            <DataTemplate DataType="{x:Type vm:TestResultsVM}">
+                <view:TestResults/>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

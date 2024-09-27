@@ -1,0 +1,106 @@
+﻿<Window x:Class="MonkeyTypeWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:MonkeyTypeWPF.modelviews"
+        xmlns:Menu="clr-namespace:MonkeyTypeWPF.utilities"
+        mc:Ignorable="d"
+        Height="600" Width="920"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        BorderThickness="0"
+        Background="Transparent"
+        AllowsTransparency="True">
+    <!--Создаем наше окно-->
+    <Border 
+        Background="#323437" 
+        CornerRadius="10" 
+        BorderThickness="0">
+        <!--Основной грид-->
+        <Grid Cursor="">
+            <!--Назначаем ряды-->
+            <Grid.RowDefinitions>
+                <!--Ряд с кнопками-->
+                <RowDefinition Height="75"/>
+                <!--Ряд с окнами-->
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <!-- Лого -->
+            <StackPanel Grid.Row="0" 
+                        Grid.Column="0">
+                <!-- Стек панель лого и названия -->
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Margin="0,10,0,0">
+                    <Image Source="/images/icon.png"
+                           Width="50"
+                           Height="50"
+                           VerticalAlignment="Center"/>
+                    <!-- Стек панель названия -->
+                    <StackPanel Orientation="Vertical"
+                                VerticalAlignment="Center"
+                                Margin="0,0,0,0">
+                        <TextBlock 
+                            Text="monkey see" 
+                            FontSize="12"
+                            HorizontalAlignment="Left"
+                            Style="{StaticResource defaultstyle}"/>     
+                        <TextBlock 
+                            Text="monkeytype"
+                            Margin="0,-5,0,0"
+                            Style="{StaticResource LogoName}"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+            <!--Кнопки для перехода по окнам-->
+            <StackPanel Grid.Row="0"
+                        HorizontalAlignment="Left"
+                        Orientation="Horizontal"
+                        Margin="175,0,0,0">
+                <!--Меню печатание -->
+                <Button
+                    Style="{StaticResource nagivationoperations}"
+                    Command="{Binding TypingCommand}">
+                    <Image Source="/images/typing_icon.png"/>
+                </Button>
+                <!--Меню аккаунт-->
+                <Button
+                    Style="{StaticResource nagivationoperations}"
+                    Command="{Binding AccountCommand}"
+                    Margin="10,0,0,0">
+                    <Image Source="/images/account_icon.png"/>
+                </Button>
+
+            </StackPanel>
+            <!--Кнопки управления окном-->
+            <StackPanel Grid.Row="0"
+                        Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        Orientation="Horizontal"
+                        Margin="0,-20,10,0">
+                <Button
+                    Command="{Binding CollapseWindowCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                    Style="{StaticResource windowoperations}">
+                    <Image Source="/images/minus_icon.png"/>
+                </Button>
+                <Button
+                    Command="{Binding CloseWindowCommand}" 
+                    Style="{StaticResource windowoperations}">
+                    
+                    <Image Source="/images/close_icon.png"/>
+                </Button>
+            </StackPanel>
+            <!--Наши страницы-->
+            <ContentControl Grid.Row="1"
+                            Content="{Binding CurrentView}">
+            </ContentControl>
+        </Grid>
+    </Border>
+</Window>

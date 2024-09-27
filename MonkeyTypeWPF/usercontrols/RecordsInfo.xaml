@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="MonkeyTypeWPF.usercontrols.RecordsInfo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MonkeyTypeWPF.usercontrols"
+             xmlns:vm="clr-namespace:MonkeyTypeWPF.modelviews"
+             mc:Ignorable="d" 
+             x:Name="RecordsInfo_uc"
+             d:DesignHeight="90" d:DesignWidth="90">
+    <Grid>
+        <Border>
+            <Grid>
+                <!--стекпанель с расширенной информацией-->
+                <StackPanel Name="InfoStack"
+                            Orientation="Vertical"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Width="90">
+                    <!--Режим-->
+                    <TextBlock Text="{Binding Mode, ElementName=RecordsInfo_uc}"
+                               FontSize="12"
+                               Style="{StaticResource defaultstyle}"/>
+                    <!--Знаков в минуту-->
+                    <TextBlock Text="{Binding WPM,TargetNullValue='- wpm', ElementName=RecordsInfo_uc, StringFormat={}{0:F0} wpm}"
+                               FontSize="12"
+                               Foreground="#b6b4ad"
+                               Style="{StaticResource defaultstyle}"/>
+                    <!--Сырых знаков в минуту-->
+                    <TextBlock Text="{Binding RawWPM,TargetNullValue='- raw', ElementName=RecordsInfo_uc, StringFormat={}{0:F0} raw}"
+                               FontSize="12"
+                               Foreground="#b6b4ad"
+                               Style="{StaticResource defaultstyle}"/>
+                    <!--Точнось-->
+                    <TextBlock Text="{Binding Accurancy,TargetNullValue='- acc', ElementName=RecordsInfo_uc, StringFormat={}{0:F0}% acc}"
+                               FontSize="12"
+                               Foreground="#b6b4ad"
+                               Style="{StaticResource defaultstyle}"/>
+                    <!--Стабильность-->
+                    <TextBlock Text="{Binding Сonsistency,TargetNullValue='- con', ElementName=RecordsInfo_uc, StringFormat={}{0:F0}% con}"
+                               FontSize="12"
+                               Foreground="#b6b4ad"
+                               Style="{StaticResource defaultstyle}"/>
+                    <!--Дата-->
+                    <TextBlock Text="{Binding Date, ElementName=RecordsInfo_uc, StringFormat={}{0:dd MMMM yyyy}}"
+                               FontSize="10"
+                               Style="{StaticResource defaultstyle}"/>
+                </StackPanel>
+                <!--стекпанель с изначальной информацией-->
+                <StackPanel Name="DefaultInfo"
+                            Orientation="Vertical"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Height="{Binding ActualHeight, ElementName=InfoStack}"
+                            Width="{Binding ActualWidth, ElementName=InfoStack}"
+                            Background="#2c2e31">
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Opacity" Value="0"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+                    <!--Режим-->
+                    <TextBlock Text="{Binding Mode, ElementName=RecordsInfo_uc}"
+                               Style="{StaticResource defaultstyle}"/>
+                    <!--Знаков в минуту-->
+                    <TextBlock Text="{Binding WPM,TargetNullValue='-', ElementName=RecordsInfo_uc, StringFormat={}{0:F0}}"
+                               Style="{StaticResource statisticstyle}"/>
+                    <!--Точнось-->
+                    <TextBlock Text="{Binding Accurancy,TargetNullValue='-', ElementName=RecordsInfo_uc, StringFormat={}{0:F0}%}"
+                               FontSize="16"
+                               Foreground="#b6b4ad"
+                               Style="{StaticResource defaultstyle}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

@@ -1,0 +1,94 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Menu="clr-namespace:MonkeyTypeWPF.utilities">
+    <!-- Стиль круглых кнопок управления окном -->
+    <Style TargetType="Button" x:Key="windowoperations">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <!-- Триггер для изменения цвета фона при наведении -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#2c2e31"/>
+                        </Trigger>
+                        <!-- Триггер для изменения цвета фона при нажатии -->
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#323437"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontFamily" Value="pack://application:,,,/MonkeyTypeWPF;component/Fonts/#Roboto Mono"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Width" Value="30"/>
+        <Setter Property="Height" Value="30"/>
+    </Style>
+    <!--Стили кнопок для навигации между пользовательскими окнами-->
+    <Style TargetType="Button" x:Key="nagivationoperations">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <!-- Триггер для изменения цвета фона при наведении -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#2c2e31"/>
+                        </Trigger>
+                        <!-- Триггер для изменения цвета фона при нажатии -->
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#323437"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontFamily" Value="pack://application:,,,/MonkeyTypeWPF;component/Fonts/#Roboto Mono"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Width" Value="30"/>
+        <Setter Property="Height" Value="30"/>
+    </Style>
+    <!--Стиль кнопок с прозрачным фоном -->
+    <Style TargetType="Button" x:Key="DefaultStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <!-- Триггер для изменения цвета фона при наведении -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="#deddd0"/>
+                        </Trigger>
+                        <!-- Триггер для изменения цвета фона при нажатии -->
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="#646669"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontFamily" Value="pack://application:,,,/MonkeyTypeWPF;component/Fonts/#Roboto Mono"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="FontSize" Value="32"/>
+        <Setter Property="Foreground" Value="#646669"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+    </Style>
+</ResourceDictionary>

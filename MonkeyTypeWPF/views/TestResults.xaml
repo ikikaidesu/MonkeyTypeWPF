@@ -1,0 +1,212 @@
+﻿<UserControl x:Class="MonkeyTypeWPF.views.TestResults"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MonkeyTypeWPF.views"
+             xmlns:uc="clr-namespace:MonkeyTypeWPF.usercontrols"
+             xmlns:oxy="http://oxyplot.org/wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <!--Создаем стиль для наведения на подсказку графа, убираем линии при наведении-->
+    <UserControl.Resources>
+        <Style TargetType="oxy:TrackerControl">
+            <Setter Property="LineStroke" Value="Transparent"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="75"/>
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <!--Стек панель wpm-->
+        <StackPanel Grid.Row="1"
+                    Grid.Column="1"
+                    Orientation="Vertical"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left">
+            <TextBlock Text="wpm" 
+                       Style="{StaticResource TextTestResults}"
+                       FontSize="24"/>
+            <TextBlock Text="{Binding WPM,  StringFormat={}{0:F0}}"
+                       Style="{StaticResource MainTestResults}">
+                <TextBlock.ToolTip>
+                    <ToolTip Placement="Top" HorizontalOffset="-10">
+                        <ToolTip.Template>
+                            <ControlTemplate TargetType="ToolTip">
+                                <uc:UpperToolTip ToolTipText="{Binding ToolTipWPM}"/>
+                            </ControlTemplate>
+                        </ToolTip.Template>
+                    </ToolTip>
+                </TextBlock.ToolTip>
+            </TextBlock>
+        </StackPanel>
+        <!--Стек панель acc-->
+        <StackPanel Grid.Row="1"
+                    Grid.Column="1"
+                    Orientation="Vertical"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Left">
+            <TextBlock Text="acc" 
+                       Style="{StaticResource TextTestResults}"
+                       FontSize="24"/>
+            <TextBlock Text="{Binding Accuracy, StringFormat={}{0:F0}%}"
+                       Style="{StaticResource MainTestResults}">
+                <TextBlock.ToolTip>
+                    <ToolTip Placement="Top" HorizontalOffset="-110">
+                        <ToolTip.Template>
+                            <ControlTemplate TargetType="ToolTip">
+                                <uc:UpperToolTip ToolTipText="{Binding ToolTipAcc}"/>
+                            </ControlTemplate>
+                        </ToolTip.Template>
+                    </ToolTip>
+                </TextBlock.ToolTip>
+            </TextBlock>
+        </StackPanel>
+        <!--Стек панель типа теста-->
+        <StackPanel Grid.Row="2"
+                    Grid.Column="1"
+                    Orientation="Vertical"
+                    HorizontalAlignment="Left">
+            <TextBlock Text="test type" 
+                       Style="{StaticResource TextTestResults}"/>
+            <TextBlock Text="{Binding TestType}"
+                       Style="{StaticResource OtherTestResults}"
+                       FontSize="16"/>
+            <TextBlock Text="{Binding Language}"
+                       Style="{StaticResource OtherTestResults}"
+                       FontSize="16"/>
+        </StackPanel>
+        <!--Граф-->
+        <Grid Grid.Row="1"
+              Grid.Column="2">
+            <oxy:PlotView Model="{Binding scatterModel}"
+                          Background="Transparent"
+                          Controller="{Binding customController}"
+                          Width="500">
+                <!--
+                у подсказки(трекера) oxyplot есть одна проблема связанная с кешированием ее размера
+                если рядом будет треугольник и кружок, то при перемещении курсора с треугольника на курсор,
+                то размер не поменяется, а текст поменяется.
+                Из этого вылезает визуальный баг на который к сожалению я не смог повлиять
+                -->
+                <oxy:PlotView.DefaultTrackerTemplate>
+                    <ControlTemplate>
+                        <oxy:TrackerControl Position="{Binding Position}" LineExtents="{Binding scatterModel.PlotArea}">
+                            <oxy:TrackerControl.Background>
+                                <SolidColorBrush Color="#C0000000" />
+                            </oxy:TrackerControl.Background>
+                            <oxy:TrackerControl.Content>
+                                <Border Background="Transparent" 
+                                    Padding="2">
+                                    <TextBlock Text="{Binding}" Style="{StaticResource graphstatisticstyle}" Margin="7"/>
+                                </Border>
+                            </oxy:TrackerControl.Content>
+                        </oxy:TrackerControl>
+                    </ControlTemplate>
+                </oxy:PlotView.DefaultTrackerTemplate>
+            </oxy:PlotView>
+        </Grid>
+        <!--грид с доп.данными-->
+        <Grid Grid.Row="2"
+              Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!--Стек панель raw-->
+            <StackPanel Grid.Column="0"
+                        Orientation="Vertical"
+                        Margin="70,0,0,0">
+                <TextBlock Text="raw" 
+                           Style="{StaticResource TextTestResults}"/>
+                <TextBlock Text="{Binding RawWPM,  StringFormat={}{0:F0}}"
+                           Style="{StaticResource OtherTestResults}"
+                           FontSize="24">
+                    <TextBlock.ToolTip>
+                        <ToolTip Placement="Top" HorizontalOffset="-30">
+                            <ToolTip.Template>
+                                <ControlTemplate TargetType="ToolTip">
+                                    <uc:UpperToolTip ToolTipText="{Binding ToolTipRawWPM}"/>
+                                </ControlTemplate>
+                            </ToolTip.Template>
+                        </ToolTip>
+                    </TextBlock.ToolTip>
+                </TextBlock>
+            </StackPanel>
+            <!--Стек панель chars-->
+            <StackPanel Grid.Column="1"
+                        Orientation="Vertical"
+                        Margin="70,0,0,0">
+                <TextBlock Text="characters" 
+                           Style="{StaticResource TextTestResults}"/>
+                <TextBlock Text="{Binding Chars}"
+                           Style="{StaticResource OtherTestResults}">
+                    <TextBlock.ToolTip>
+                        <ToolTip Placement="Top" HorizontalOffset="-100">
+                            <ToolTip.Template>
+                                <ControlTemplate TargetType="ToolTip">
+                                    <uc:UpperToolTip ToolTipText="{Binding ToolTipCharacters}"/>
+                                </ControlTemplate>
+                            </ToolTip.Template>
+                        </ToolTip>
+                    </TextBlock.ToolTip>
+                </TextBlock>
+            </StackPanel>
+            <!--Стек панель con-->
+            <StackPanel Grid.Column="2"
+                        Orientation="Vertical"
+                        Margin="70,0,0,0">
+                <TextBlock Text="con" 
+                           Style="{StaticResource TextTestResults}"/>
+                <TextBlock Text="{Binding Consistency, StringFormat={}{0:F0}%}"
+                           Style="{StaticResource OtherTestResults}"/>
+            </StackPanel>
+            <!--Стек панель time-->
+            <StackPanel Grid.Column="3"
+                        Orientation="Vertical"
+                        Margin="70,0,0,0">
+                <TextBlock Text="time" 
+                           Style="{StaticResource TextTestResults}"/>
+                <TextBlock Text="{Binding NumTime,  StringFormat={}{0:F0}s}"
+                           Style="{StaticResource OtherTestResults}">
+                    <TextBlock.ToolTip>
+                        <ToolTip Placement="Top" HorizontalOffset="5">
+                            <ToolTip.Template>
+                                <ControlTemplate TargetType="ToolTip">
+                                    <uc:UpperToolTip ToolTipText="{Binding ToolTipTime}"/>
+                                </ControlTemplate>
+                            </ToolTip.Template>
+                        </ToolTip>
+                    </TextBlock.ToolTip>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+        <!--Кнопка следующего теста-->
+        <Grid Grid.Row="3"
+              Grid.ColumnSpan="3">
+            <Button Content="ᐳ"
+                    Style="{StaticResource DefaultStyle}"
+                    Command="{Binding NextTestCommand}">
+                <Button.ToolTip>
+                    <ToolTip Placement="Top" HorizontalOffset="310" VerticalOffset="80">
+                        <ToolTip.Template>
+                            <ControlTemplate TargetType="ToolTip">
+                                <uc:LowerUserControl ToolTipText="Next test"/>
+                            </ControlTemplate>
+                        </ToolTip.Template>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+        </Grid>
+    </Grid>
+</UserControl>
